@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fa',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -149,7 +149,7 @@ return [
         Illuminate\Encryption\EncryptionServiceProvider::class,
         Illuminate\Filesystem\FilesystemServiceProvider::class,
 //        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
-//        Illuminate\Hashing\HashServiceProvider::class,
+        Illuminate\Hashing\HashServiceProvider::class,
 //        Illuminate\Mail\MailServiceProvider::class,
 //        Illuminate\Notifications\NotificationServiceProvider::class,
 //        Illuminate\Pagination\PaginationServiceProvider::class,
