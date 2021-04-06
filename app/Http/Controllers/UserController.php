@@ -12,7 +12,7 @@ class UserController{
 		User::create($request->validated());
 		return response()->json([
 			'success' => true,
-			'message' => 'User created successfully',
+			'message' => __('auth.register'),
 			'code' => 201,
 		], 201);
 	}
@@ -21,7 +21,7 @@ class UserController{
 		if(!$token = $this->guard()->attempt($request->validated())){
 			return response()->json([
 				'success' => false,
-				'message' => 'user info or password is incorrect',
+				'message' => __('auth.failed'),
 				'code' => 401,
 			], 401);
 		}
@@ -41,16 +41,17 @@ class UserController{
 		$this->guard()->logout();
 		return response()->json([
 			'success' => true,
-			'message' => 'Successfully logged out',
+			'message' => __('auth.logout'),
 			'code' => 200,
 		]);
 	}
 	
 	public function refresh(){
-		return $this->respondWithToken($this->guard()->refresh(), 'Token refreshed');
+		return $this->respondWithToken($this->guard()->refresh(), __('auth.refresh'));
 	}
 	
-	protected function respondWithToken($token, $message='Logged in successfully'){
+	protected function respondWithToken($token, $message=''){
+		if(!$message) $message = __('auth.login');
 		return response()->json([
 			'success' => true,
 			'message' => $message,

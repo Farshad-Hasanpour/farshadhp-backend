@@ -13,9 +13,12 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
+    'failed' => 'User info is incorrect.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-	'unauthorized' => 'Unauthorized'
-
+	'unauthorized' => 'Unauthorized.',
+	'login' => 'You logged in successfully. Welcome.',
+	'refresh' => 'Token refreshed.',
+	'logout' => 'Logged out successfully.',
+	'register' => 'User created successfully.'
 ];

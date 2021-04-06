@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\User;
+use Illuminate\Contracts\Validation\Validator;
+use \Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
@@ -38,4 +39,16 @@ class LoginRequest extends FormRequest
 		];
     }
     
+    public function validated(){
+    	$validated = $this->validator->validated();
+    	if(array_key_exists('username', $validated) && array_key_exists('email', $validated)){
+    		unset($validated['email']);
+		}
+    	$validated['suspended'] = false;
+    	return $validated;
+	}
+	
+	protected function failedValidation(Validator $validator){
+		throw new ValidationException($validator);
+	}
 }

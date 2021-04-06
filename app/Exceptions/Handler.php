@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use \Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
@@ -48,13 +49,21 @@ class Handler extends ExceptionHandler
 				'message' => $e->getMessage()
 			], $code);
 		});
-	
+
 		$this->renderable(function (AuthenticationException $e) {
 			return response([
 				'success' => false,
 				'code' => 401,
 				'message' => __('auth.unauthorized')
 			], 401);
+		});
+	
+		$this->renderable(function (ValidationException $e) {
+			return response([
+				'success' => false,
+				'code' => $e->status,
+				'message' => $e->validator->errors()->first()
+			], $e->status);
 		});
 	
 		$this->renderable(function (Throwable $e) {

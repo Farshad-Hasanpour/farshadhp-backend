@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\User;
+use Illuminate\Contracts\Validation\Validator;
+use \Illuminate\Validation\ValidationException;
 
 class RegisterPostRequest extends FormRequest
 {
@@ -40,5 +41,9 @@ class RegisterPostRequest extends FormRequest
     	$validated = $this->validator->validated();
     	$validated['password'] = password_hash($validated['password'], PASSWORD_DEFAULT);
     	return $validated;
+	}
+	
+	protected function failedValidation(Validator $validator){
+		throw new ValidationException($validator);
 	}
 }

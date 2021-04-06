@@ -12,10 +12,13 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-	'unauthorized' => 'خطا در احراز هویت'
-
+    
+	'failed' => 'اطلاعات کاربری نادرست است.',
+    'password' => 'رمز عبور نادرست است.',
+    'throttle' => 'شما تعداد زیادی تلاش ناموفق برای ورود داشته اید. لطفا :seconds ثانیه صبر کنید.',
+	'unauthorized' => 'خطا در احراز هویت',
+	'login' => 'با موفقیت وارد شدید.',
+	'refresh' => 'توکن بازسازی شد.',
+	'logout' => 'با موفقیت خارج شدید.',
+	'register' => 'با موفقیت ثبت نام کرده اید. خوش آمدید.'
 ];
