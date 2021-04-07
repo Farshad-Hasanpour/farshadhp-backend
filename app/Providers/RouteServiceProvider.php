@@ -35,6 +35,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+		
+		Route::pattern('locale', '[a-z]+');
+		Route::pattern('id', '[0-9]+');
+		Route::pattern('role', '[0-9]+');
+		
         $this->configureRateLimiting();
 
         $this->routes(function () {

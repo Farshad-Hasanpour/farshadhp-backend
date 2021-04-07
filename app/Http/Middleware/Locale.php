@@ -18,6 +18,7 @@ class Locale{
     public function handle(Request $request, Closure $next){
     	$locale = $request->route('locale', 'en');
     	App::setLocale($locale);
+		$request->route()->forgetParameter('locale');
         return $next($request);
     }
 }

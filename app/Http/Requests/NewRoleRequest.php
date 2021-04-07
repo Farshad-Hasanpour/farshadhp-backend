@@ -6,22 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use \Illuminate\Validation\ValidationException;
 
-class RegisterPostRequest extends FormRequest
+class NewRoleRequest extends FormRequest
 {
-	/**
-	 * Indicates if the validator should stop on the first rule failure.
-	 *
-	 * @var bool
-	 */
-	protected $stopOnFirstFailure = true;
-	
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize(){
-        return true;
+    	$role = auth()->user()->role;
+    	return $role && $role->is_administrator();
     }
 
     /**
@@ -31,17 +25,9 @@ class RegisterPostRequest extends FormRequest
      */
     public function rules(){
         return [
-			'username' => ['required', 'alpha_dash', 'between:4,32', 'unique:App\Models\User,username'],
-			'email' => ['required', 'email', 'unique:App\Models\User,email'],
-			'password' => ['required', 'min:6']
+        	'name' => ['required', 'string', 'between:3,32', 'unique:App\Models\Role,name'],
         ];
     }
-	
-	public function validated(){
-    	$validated = $this->validator->validated();
-    	$validated['password'] = password_hash($validated['password'], PASSWORD_DEFAULT);
-    	return $validated;
-	}
 	
 	protected function failedValidation(Validator $validator){
 		throw new ValidationException($validator);
