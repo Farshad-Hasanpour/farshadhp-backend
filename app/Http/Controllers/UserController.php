@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+
 use App\Http\Requests\RegisterPostRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\PasswordChangeRequest;
 use App\Http\Requests\EmailChangeRequest;
 use App\Http\Requests\PersonalInfoChangeRequest;
+use App\Http\Requests\AvatarPutRequest;
+
+use Cloudinary\Api\Upload\UploadApi;
 
 class UserController{
 	
@@ -101,6 +105,7 @@ class UserController{
 			'location' => 'location',
 			'birthday' => 'birthday',
 			'website' => 'website',
+			'bio' => 'bio',
 			'github' => 'social_github',
 			'whatsapp' => 'social_whatsapp',
 			'telegram' => 'social_telegram',
@@ -118,7 +123,37 @@ class UserController{
 		return api_response(200, __('user.personal_info_change'));
 	}
 	
+	public function put_avatar(AvatarPutRequest $request, UploadApi $cloudinary){
+		// Maximum size is 500Kb in validator
+		$base64 = ($request->validated())['avatar'];
+		$result = $cloudinary->upload($base64, [
+			"public_id" => $this->avatar_public_id(),
+			"resource_type" => "image",
+			'format' => 'jpg',
+			'allowed_formats' => ['jpg'],
+			'overwrite' => true,
+			'transformation' => 'ar_1.0,q_auto:good,c_crop,g_face'// aspect ratio 1, crop face,
+		]);
+		if(!$result['url']) abort(424, __('user.avatar.upload_unsuccessful'));
+		$user = $this->guard()->user();
+		$user->avatar = $result['url'];
+		$user->save();
+		return api_response(200, __('user.avatar.upload_successful'));
+	}
+	
+	public function delete_avatar(UploadApi $cloudinary){
+		$user = $this->guard()->user();
+		if(!$user->avatar) return api_response(200, __('user.avatar.delete_successful'));
+		$result = $cloudinary->destroy($this->avatar_public_id());
+		if(!$result->result == 'ok') abort(424, __('user.avatar.delete_unsuccessful'));
+		return api_response(200, __('user.avatar.delete_successful'));
+	}
+	
 	protected function guard(){
 		return auth('api');
+	}
+	
+	protected function avatar_public_id(){
+		return 'avatars/' . $this->guard()->user()->username;
 	}
 }

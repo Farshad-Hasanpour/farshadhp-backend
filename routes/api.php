@@ -21,14 +21,16 @@ Route::post('register', [UserController::class, 'register']);
 
 Route::middleware(['auth:api'])->group(function () {
 	// User
-	Route::get('logout', [UserController::class, 'logout']);
-	Route::get('refresh', [UserController::class, 'refresh']);
+	Route::get('logout', [UserController::class, 'logout']);	// TODO:http method??
+	Route::get('refresh', [UserController::class, 'refresh']);	// TODO:http method??
 	Route::get('profile', [UserController::class, 'profile']);
 	Route::patch('password', [UserController::class, 'change_password']);
 	Route::patch('email', [UserController::class, 'change_email']);
-	Route::get('suspend/{user}', [UserController::class, 'suspend']);
-	Route::get('unsuspend/{user}', [UserController::class, 'unsuspend']);
+	Route::get('suspend/{user}', [UserController::class, 'suspend']); 	// TODO:http method??
+	Route::get('unsuspend/{user}', [UserController::class, 'unsuspend']);	// TODO:http method??
 	Route::patch('personal_info', [UserController::class, 'change_personal_info']);
+	Route::put('avatar', [UserController::class, 'put_avatar']);
+	Route::delete('avatar', [UserController::class, 'delete_avatar']);
 	// Role
 	Route::get('roles/{role?}', [RoleController::class, 'find']);
 	Route::post('roles', [RoleController::class, 'create']);

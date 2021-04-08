@@ -23,7 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('password', 255);
             $table->boolean('suspended')->default(false);
             $table->date('create_date')->default(date('y-m-d'));
+            $table->string('avatar', 255)->nullable();
             $table->string('name', 64)->nullable();
+			$table->string('bio', 255)->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->date('birthday')->nullable();
             $table->string('location', 128)->nullable();
@@ -37,7 +39,7 @@ class CreateUsersTable extends Migration
             
             $table->engine = 'InnoDB';
             $table->foreign('role_id')->references('id')->on('roles')->onUpdate('restrict')->onDelete('set null');
-        });
+		});
     }
     
     /**
