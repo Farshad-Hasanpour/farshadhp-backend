@@ -39,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 		Route::pattern('locale', '[a-z]+');
 		Route::pattern('id', '[0-9]+');
 		Route::pattern('role', '[0-9]+');
+		Route::pattern('user', '[0-9]+');
 		
         $this->configureRateLimiting();
 

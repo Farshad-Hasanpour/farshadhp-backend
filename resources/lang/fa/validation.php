@@ -33,7 +33,7 @@ return [
     'confirmed' => 'The :attribute confirmation does not match.',
     'date' => 'The :attribute is not a valid date.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
-    'date_format' => 'The :attribute does not match the format :format.',
+    'date_format' => ':attribute فرمت زمانی نادرستی دارد.',
     'different' => 'The :attribute and :other must be different.',
     'digits' => 'The :attribute must be :digits digits.',
     'digits_between' => 'The :attribute must be between :min and :max digits.',
@@ -57,7 +57,7 @@ return [
         'array' => 'The :attribute must have :value items or more.',
     ],
     'image' => 'The :attribute must be an image.',
-    'in' => 'The selected :attribute is invalid.',
+    'in' => ':attribute انتخاب شده نامعتبر است.',
     'in_array' => 'The :attribute field does not exist in :other.',
     'integer' => 'The :attribute must be an integer.',
     'ip' => 'The :attribute must be a valid IP address.',
@@ -114,11 +114,11 @@ return [
         'array' => 'The :attribute must contain :size items.',
     ],
     'starts_with' => 'The :attribute must start with one of the following: :values.',
-    'string' => ':attribute نباید عددی باشد.',
+    'string' => ':attribute باید متنی باشد.',
     'timezone' => 'The :attribute must be a valid zone.',
     'unique' => ':attribute تکراری است.',
     'uploaded' => 'The :attribute failed to upload.',
-    'url' => 'The :attribute format is invalid.',
+    'url' => ':attribute فرمت درستی ندارد.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
     /*
@@ -153,7 +153,20 @@ return [
     	'username' => 'نام کاربری',
 		'email' => 'ایمیل',
 		'password' => 'رمز عبور',
-		'name' => 'نام'
+		'name' => 'نام',
+		'old_password' => 'رمز عبور پیشین',
+		'new_password' => 'رمز عبور جدید',
+		'name' => 'نام',
+		'gender' => 'جنسیت',
+		'location' => 'مکان',
+		'birthday' => 'تاریخ تولد',
+		'website' => 'وبسایت',
+		'github' => 'لینک گیت هاب',
+		'whatsapp' => 'لینک واتساپ',
+		'telegram' => 'لینک تلگرام',
+		'twitter' => 'لینک توییتر',
+		'linkedin' => 'آدرس Linkedin',
+		'instagram' => 'لینک اینستاگرام'
 	],
 
 ];

@@ -33,7 +33,7 @@ class RegisterPostRequest extends FormRequest
         return [
 			'username' => ['required', 'alpha_dash', 'between:4,32', 'unique:App\Models\User,username'],
 			'email' => ['required', 'email', 'unique:App\Models\User,email'],
-			'password' => ['required', 'min:6']
+			'password' => ['required', 'string', 'min:6']
         ];
     }
 	

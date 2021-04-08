@@ -6,8 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use \Illuminate\Validation\ValidationException;
 
-class NewRoleRequest extends FormRequest
-{
+class PasswordChangeRequest extends FormRequest{
 	/**
 	 * Indicates if the validator should stop on the first rule failure.
 	 *
@@ -21,8 +20,7 @@ class NewRoleRequest extends FormRequest
      * @return bool
      */
     public function authorize(){
-    	$role = auth()->user()->role;
-    	return $role && $role->is_administrator();
+    	return true;
     }
 
     /**
@@ -32,9 +30,17 @@ class NewRoleRequest extends FormRequest
      */
     public function rules(){
         return [
-        	'name' => ['required', 'string', 'between:3,32', 'unique:App\Models\Role,name'],
+            'old_password' => ['required', 'string', 'password'],
+			'new_password' => ['required', 'string', 'min:6']
         ];
     }
+	
+	public function validated(){
+		$validated = $this->validator->validated();
+		unset($validated['old_password']);
+		$validated['new_password'] = password_hash($validated['new_password'], PASSWORD_DEFAULT);
+		return $validated;
+	}
 	
 	protected function failedValidation(Validator $validator){
 		throw new ValidationException($validator);

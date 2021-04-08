@@ -35,7 +35,7 @@ class LoginRequest extends FormRequest
         return [
 			'username' => ['required_without:email', 'string', 'exists:App\Models\User,username'],
 			'email' => ['required_without:username', 'email', 'exists:App\Models\User,email'],
-			'password' => ['required']
+			'password' => ['required', 'string']
 		];
     }
     

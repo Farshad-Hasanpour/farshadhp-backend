@@ -6,8 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use \Illuminate\Validation\ValidationException;
 
-class NewRoleRequest extends FormRequest
-{
+class EmailChangeRequest extends FormRequest{
 	/**
 	 * Indicates if the validator should stop on the first rule failure.
 	 *
@@ -15,15 +14,14 @@ class NewRoleRequest extends FormRequest
 	 */
 	protected $stopOnFirstFailure = true;
 	
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(){
-    	$role = auth()->user()->role;
-    	return $role && $role->is_administrator();
-    }
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize(){
+		return true;
+	}
 
     /**
      * Get the validation rules that apply to the request.
@@ -32,7 +30,7 @@ class NewRoleRequest extends FormRequest
      */
     public function rules(){
         return [
-        	'name' => ['required', 'string', 'between:3,32', 'unique:App\Models\Role,name'],
+            'email' => ['required', 'email', 'unique:App\Models\User,email']
         ];
     }
 	

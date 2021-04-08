@@ -20,6 +20,8 @@ class RoleController{
 	}
 	
 	public function find(Role $role){
+		$user_role = $this->guard()->user()->role;
+		if( !( $user_role && $user_role->is_administrator() ) ) abort(403, __('auth.unauthorized'));
 		return api_response(200, '',
 			[
 				'roles' => $role->id ? [$role->toArray()] : Role::all()->toArray()
@@ -28,11 +30,9 @@ class RoleController{
 	}
 	
 	public function delete(Role $role){
-		$user_role = auth()->user()->role;
-		if($user_role && $user_role->is_administrator()){
-			$role->delete();
-			return api_response(200, __('role.delete'));
-		}
-		return abort(403, __('auth.unauthorized'));
+		$user_role = $this->guard()->user()->role;
+		if( !( $user_role && $user_role->is_administrator() ) ) abort(403, __('auth.unauthorized'));
+		$role->delete();
+		return api_response(200, __('role.delete'));
 	}
 }

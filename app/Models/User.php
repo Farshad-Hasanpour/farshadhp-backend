@@ -61,6 +61,14 @@ class User extends Authenticatable implements JWTSubject
     public function role(){
         return $this->belongsTo(Role::class);
     }
+    
+    public function abortIfSuspended(){
+		if($this->isSuspended()) abort(403, __('user.suspended'));
+	}
+	
+	public function isSuspended(){
+		return $this->id && $this->suspended;
+	}
 	
 	/**
 	 * Get the identifier that will be stored in the subject claim of the JWT.
