@@ -16,9 +16,9 @@ class RoleController{
 		$validated = $request->validated();
 		$fillable = [
 			'name' => 'name',
-			'blog_modify' => 'blog_modify',
-			'blog_submit' => 'blog_submit',
-			'blog_modify_others' => 'blog_modify_others',
+			'articles_modify' => 'articles_modify',
+			'articles_submit' => 'articles_submit',
+			'articles_modify_others' => 'articles_modify_others',
 		];
 		foreach($fillable as $field => $db_attribute ){
 			if(!array_key_exists($field, $validated)) continue; // skip if field is not fillable

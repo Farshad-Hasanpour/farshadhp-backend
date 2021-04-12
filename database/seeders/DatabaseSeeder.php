@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
 		Role::create(
 			[
 				'name' => 'administrator',
-				'blog_submit' => true,
-				'blog_publish' => true,
-				'blog_modify_others' => true,
+				'articles_submit' => true,
+				'articles_publish' => true,
+				'articles_modify_others' => true,
 			]
 		);
 		

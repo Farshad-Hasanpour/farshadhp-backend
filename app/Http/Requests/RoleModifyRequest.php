@@ -33,9 +33,9 @@ class RoleModifyRequest extends FormRequest{
     	$boolean_privilege = ['nullable', 'boolean'];
         return [
 			'name' => ['nullable', 'string', 'between:3,32'],
-			'blog_modify' => $boolean_privilege,
-			'blog_submit' => $boolean_privilege,
-			'blog_modify_others' => $boolean_privilege,
+			'articles_modify' => $boolean_privilege,
+			'articles_submit' => $boolean_privilege,
+			'articles_modify_others' => $boolean_privilege,
         ];
     }
 	

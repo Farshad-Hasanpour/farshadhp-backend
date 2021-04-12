@@ -17,9 +17,9 @@ class CreateRolesTable extends Migration
     
             $table->smallIncrements('id');
             $table->string('name', 32)->unique();
-			$table->boolean('blog_submit')->default(false);
-			$table->boolean('blog_publish')->default(false);
-			$table->boolean('blog_modify_others')->default(false);
+			$table->boolean('articles_submit')->default(false);
+			$table->boolean('articles_publish')->default(false);
+			$table->boolean('articles_modify_others')->default(false);
             $table->engine = 'InnoDB';
         });
     }
