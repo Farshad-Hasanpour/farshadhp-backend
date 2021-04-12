@@ -14,7 +14,18 @@ class RoleController{
 	
 	public function modify(RoleModifyRequest $request, Role $role){
 		$validated = $request->validated();
-		$role->name = $validated['name'];
+		$fillable = [
+			'name' => 'name',
+			'blog_modify' => 'blog_modify',
+			'blog_submit' => 'blog_submit',
+			'blog_modify_others' => 'blog_modify_others',
+		];
+		foreach($fillable as $field => $db_attribute ){
+			if(!array_key_exists($field, $validated)) continue; // skip if field is not fillable
+			$value = $validated[$field];
+			if($value == '') $value = null;
+			$role[$db_attribute] = $value;
+		}
 		$role->save();
 		return api_response(200, __('role.modify'));
 	}

@@ -30,8 +30,12 @@ class RoleModifyRequest extends FormRequest{
      * @return array
      */
     public function rules(){
+    	$boolean_privilege = ['nullable', 'boolean'];
         return [
-			'name' => ['string', 'between:3,32']
+			'name' => ['nullable', 'string', 'between:3,32'],
+			'blog_modify' => $boolean_privilege,
+			'blog_submit' => $boolean_privilege,
+			'blog_modify_others' => $boolean_privilege,
         ];
     }
 	
